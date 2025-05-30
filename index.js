@@ -5,7 +5,12 @@ import noteRouters from "./server/routes/notesRoutes.js";
 
 const app = express();
 await connectToDB();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://notesappbyraj.netlify.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 app.use(express.json());
 
