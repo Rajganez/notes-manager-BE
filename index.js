@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import connectToDB from "./server/mongo-db.js";
 import noteRouters from "./server/routes/notesRoutes.js";
+import { swaggerSpec, swaggerui } from "./swagger.js";
 
 const app = express();
 await connectToDB();
@@ -13,6 +14,8 @@ app.use(
 );
 
 app.use(express.json());
+
+app.use("/api/docs", swaggerui.serve, swaggerui.setup(swaggerSpec));
 
 app.use("/api", noteRouters);
 
